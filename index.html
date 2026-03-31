@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formula Heat Modifiers</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Formula Heat: Track Modifiers</h1>
+    <p>Choose a track and get the corners & straights modifiers for your heat race.</p>
+  </header>
+
+  <main class="container">
+    <section class="selector-card">
+      <label for="trackSelect">Track</label>
+      <select id="trackSelect" aria-label="Track selector"></select>
+      <p class="hint">Select a track to see the modifier setup for corners and straights.</p>
+    </section>
+
+    <section id="modifiersSection" class="modifiers-card" hidden>
+      <h2>Track Modifiers</h2>
+      <div class="modifiers-columns">
+        <div class="modifiers-group" id="cornersGroup">
+          <h3>Curves</h3>
+          <ul id="cornersList"></ul>
+        </div>
+        <div class="modifiers-group" id="straightsGroup">
+          <h3>Straights</h3>
+          <ul id="straightsList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <p id="emptyMessage" class="empty-message">No track selected.</p>
+  </main>
+
+  <script src="get-random-modifiers.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
