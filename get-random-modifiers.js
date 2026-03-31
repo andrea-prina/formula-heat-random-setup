@@ -27,9 +27,13 @@ function processCornersModifiers(cornersNum) {
   ];
 
   const pressCornersNum = getRandomIntFromZeroToMax(2);
-  const plainCornersNum = getRandomIntFromZeroToMax(1);
+  let plainCornersNum = getRandomIntFromZeroToMax(1);
 
   const remaining = Math.max(0, cornersNum - pressCornersNum - plainCornersNum);
+
+  if (remaining > CORNER_MODIFIERS.length) {
+    plainCornersNum += remaining - CORNER_MODIFIERS.length;
+  }
 
   let selected = [...getRandomElements(CORNER_MODIFIERS, remaining)];
 
