@@ -14,35 +14,31 @@ const shuffleArray = (arr) => {
   return copy;
 };
 
-const getRandomElements = (arr, n) =>
-  shuffleArray(arr).slice(0, n);
+const getRandomElements = (arr, n) => shuffleArray(arr).slice(0, n);
 
 function processCornersModifiers(cornersNum) {
   const CORNER_MODIFIERS = [
-    'heat',
-    'corner+1',
-    'corner+1',
-    'corner-1',
-    'corner-1',
-    'heat'
+    "Extra Heat",
+    "Speed +1",
+    "Speed +1",
+    "Speed -1",
+    "Speed -1",
+    "Extra Heat",
   ];
 
   const pressCornersNum = getRandomIntFromZeroToMax(2);
   const plainCornersNum = getRandomIntFromZeroToMax(1);
 
-  const remaining =
-    Math.max(0, cornersNum - pressCornersNum - plainCornersNum);
+  const remaining = Math.max(0, cornersNum - pressCornersNum - plainCornersNum);
 
-  let selected = [
-    ...getRandomElements(CORNER_MODIFIERS, remaining)
-  ];
+  let selected = [...getRandomElements(CORNER_MODIFIERS, remaining)];
 
   for (let i = 0; i < pressCornersNum; i++) {
-    selected.push('press');
+    selected.push("Press Corner");
   }
 
   for (let i = 0; i < plainCornersNum; i++) {
-    selected.push('none');
+    selected.push("-");
   }
 
   selected = shuffleArray(selected);
@@ -50,27 +46,30 @@ function processCornersModifiers(cornersNum) {
   return selected;
 }
 
-function processStraightsModifiers(straightsNum) {
+function processSectorsModifiers(sectorsNum) {
   const STRAIGHT_MODIFIERS = [
-    'weather',
-    'slipstream',
-    'slipstream',
-    'boost',
-    'boost',
-    'weather'
+    "Weather Effect", // Just one as a weather effect is always present
+    "Slipstream +1",
+    "Slipstream +1",
+    "Free Boost",
+    "Free Boost",
   ];
 
   const plainStraightsNum = getRandomIntFromZeroToMax(2);
+  const requiredWeatherEffectsNum = 1;
 
-  const remaining =
-    Math.max(0, straightsNum - plainStraightsNum);
+  const remaining = Math.max(
+    0,
+    sectorsNum - plainStraightsNum - requiredWeatherEffectsNum,
+  );
 
   let selected = [
-    ...getRandomElements(STRAIGHT_MODIFIERS, remaining)
+    ...getRandomElements(STRAIGHT_MODIFIERS, remaining),
+    "Weather Effect",
   ];
 
   for (let i = 0; i < plainStraightsNum; i++) {
-    selected.push('none');
+    selected.push("-");
   }
 
   selected = shuffleArray(selected);
@@ -78,21 +77,33 @@ function processStraightsModifiers(straightsNum) {
   return selected;
 }
 
-const trackList = ['Japan', 'Mexico', 'Great Britain', 'France']
+const trackList = [
+  "Japan",
+  "Mexico",
+  "Great Britain",
+  "France",
+  "Netherlands",
+  "Spain",
+  "Italy",
+  "USA",
+];
 
-function getTrackModifiers(track){
+function getTrackModifiers(track) {
+  const trackDetails = {
+    Japan: { cornersNum: 4, sectorsNum: 4 },
+    Mexico: { cornersNum: 4, sectorsNum: 4 },
+    "Great Britain": { cornersNum: 5, sectorsNum: 5 },
+    France: { cornersNum: 5, sectorsNum: 5 },
+    Netherlands: { cornersNum: 4, sectorsNum: 4 },
+    Spain: { cornersNum: 9, sectorsNum: 9 },
+    Italy: { cornersNum: 3, sectorsNum: 3 },
+    USA: { cornersNum: 4, sectorsNum: 4 },
+  };
 
-    const trackDetails = {
-    Japan: { cornersNum: 4, straightsNum: 4 },
-    Mexico: { cornersNum: 4, straightsNum: 4 },
-    'Great Britain': { cornersNum: 5, straightsNum: 4 },
-    France: { cornersNum: 5, straightsNum: 5 }
-    };
+  const { cornersNum, sectorsNum } = trackDetails[track];
+  const trackModifiers = { corners: undefined, straights: undefined };
+  trackModifiers.corners = processCornersModifiers(cornersNum);
+  trackModifiers.straights = processSectorsModifiers(sectorsNum);
 
-    const { cornersNum, straightsNum } = trackDetails[track];
-    const trackModifiers = {corners: undefined, straights: undefined}
-    trackModifiers.corners = processCornersModifiers(cornersNum)
-    trackModifiers.straights = processStraightsModifiers(straightsNum)
-
-    return trackModifiers
+  return trackModifiers;
 }

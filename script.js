@@ -5,7 +5,7 @@
 
 const trackSelect = document.getElementById("trackSelect");
 const cornersList = document.getElementById("cornersList");
-const straightsList = document.getElementById("straightsList");
+const sectorsList = document.getElementById("sectorsList");
 const rerollButton = document.getElementById("rerollButton");
 const modifiersSection = document.getElementById("modifiersSection");
 const emptyMessage = document.getElementById("emptyMessage");
@@ -20,7 +20,7 @@ function buildDropdown() {
   placeholder.textContent = "-- Select a track --";
   trackSelect.appendChild(placeholder);
 
-  trackList.forEach(name => {
+  trackList.forEach((name) => {
     const option = document.createElement("option");
     option.value = name;
     option.textContent = name;
@@ -49,15 +49,15 @@ function renderModifiers(trackName) {
 
   modifiers.straights.forEach((straight, index) => {
     const item = document.createElement("li");
-    item.textContent = `Straight ${index + 1}: ${straight}`;
-    straightsList.appendChild(item);
+    item.textContent = `Sector ${index + 1}: ${straight}`;
+    sectorsList.appendChild(item);
   });
 
   modifiersSection.hidden = false;
   emptyMessage.hidden = true;
 }
 
-trackSelect.addEventListener("change", event => {
+trackSelect.addEventListener("change", (event) => {
   const trackName = event.target.value;
   if (!trackName) return;
   selectedTrack = trackName;
