@@ -67,6 +67,22 @@ header p { margin: 8px 0 0; color: var(--text-muted); }
   color: #fff;
 }
 
+.reroll-btn {
+  display: inline-block;
+  margin: 0 0 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid #5868a8;
+  background: #252849;
+  color: #dfdfef;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reroll-btn:hover {
+  background: #323660;
+}
+
 .modifiers-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;

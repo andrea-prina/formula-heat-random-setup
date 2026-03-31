@@ -6,8 +6,11 @@
 const trackSelect = document.getElementById("trackSelect");
 const cornersList = document.getElementById("cornersList");
 const straightsList = document.getElementById("straightsList");
+const rerollButton = document.getElementById("rerollButton");
 const modifiersSection = document.getElementById("modifiersSection");
 const emptyMessage = document.getElementById("emptyMessage");
+
+let selectedTrack = null;
 
 function buildDropdown() {
   const placeholder = document.createElement("option");
@@ -29,9 +32,9 @@ function renderModifiers(trackName) {
   const modifiers = getTrackModifiers(trackName);
 
   cornersList.innerHTML = "";
-  straightsList.innerHTML = "";
+  sectorsList.innerHTML = "";
 
-  if (!modifiers.corners.length && !modifiers.straights.length) {
+  if (!modifiers.corners.length && !modifiers.sectors.length) {
     modifiersSection.hidden = true;
     emptyMessage.textContent = "No modifiers available for this track.";
     emptyMessage.hidden = false;
@@ -40,13 +43,13 @@ function renderModifiers(trackName) {
 
   modifiers.corners.forEach((corner, index) => {
     const item = document.createElement("li");
-    item.textContent = `Curva ${index + 1}: ${corner}`;
+    item.textContent = `Corner ${index + 1}: ${corner}`;
     cornersList.appendChild(item);
   });
 
   modifiers.straights.forEach((straight, index) => {
     const item = document.createElement("li");
-    item.textContent = `Rettilineo ${index + 1}: ${straight}`;
+    item.textContent = `Straight ${index + 1}: ${straight}`;
     straightsList.appendChild(item);
   });
 
@@ -57,7 +60,18 @@ function renderModifiers(trackName) {
 trackSelect.addEventListener("change", event => {
   const trackName = event.target.value;
   if (!trackName) return;
+  selectedTrack = trackName;
   renderModifiers(trackName);
+});
+
+rerollButton.addEventListener("click", () => {
+  if (!selectedTrack) {
+    emptyMessage.textContent = "Select a track first to reroll.";
+    emptyMessage.hidden = false;
+    return;
+  }
+
+  renderModifiers(selectedTrack);
 });
 
 buildDropdown();

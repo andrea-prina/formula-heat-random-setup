@@ -78,15 +78,15 @@ function processStraightsModifiers(straightsNum) {
   return selected;
 }
 
-const trackList = ['japan', 'mexico', 'greatbritain', 'france']
+const trackList = ['Japan', 'Mexico', 'Great Britain', 'France']
 
 function getTrackModifiers(track){
 
     const trackDetails = {
-    japan: { cornersNum: 4, straightsNum: 4 },
-    mexico: { cornersNum: 4, straightsNum: 4 },
-    greatbritain: { cornersNum: 5, straightsNum: 4 },
-    france: { cornersNum: 5, straightsNum: 5 }
+    Japan: { cornersNum: 4, straightsNum: 4 },
+    Mexico: { cornersNum: 4, straightsNum: 4 },
+    'Great Britain': { cornersNum: 5, straightsNum: 4 },
+    France: { cornersNum: 5, straightsNum: 5 }
     };
 
     const { cornersNum, straightsNum } = trackDetails[track];
