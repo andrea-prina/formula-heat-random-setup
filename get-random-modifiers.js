@@ -86,6 +86,19 @@ function processSectorsModifiers(sectorsNum) {
   return selected;
 }
 
+function processWeatherEffect() {
+  const WEATHER_EFFECTS = [
+    "Sunny",
+    "Cloudy",
+    "Rainy",
+    "Stormy",
+    "Foggy",
+    "Snowy",
+  ];
+
+  return getRandomElements(WEATHER_EFFECTS, 1)[0];
+}
+
 const trackList = [
   "Japan",
   "Mexico",
@@ -114,9 +127,14 @@ function getTrackModifiers(track) {
   };
 
   const { cornersNum, sectorsNum } = trackDetails[track];
-  const trackModifiers = { corners: undefined, straights: undefined };
+  const trackModifiers = {
+    corners: undefined,
+    straights: undefined,
+    weatherEffect: undefined,
+  };
   trackModifiers.corners = processCornersModifiers(cornersNum);
   trackModifiers.straights = processSectorsModifiers(sectorsNum);
+  trackModifiers.weatherEffect = processWeatherEffect();
 
   return trackModifiers;
 }

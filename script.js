@@ -6,6 +6,7 @@
 const trackSelect = document.getElementById("trackSelect");
 const cornersList = document.getElementById("cornersList");
 const sectorsList = document.getElementById("sectorsList");
+const weatherEffectList = document.getElementById("weatherEffectList");
 const rerollButton = document.getElementById("rerollButton");
 const modifiersSection = document.getElementById("modifiersSection");
 const emptyMessage = document.getElementById("emptyMessage");
@@ -33,8 +34,13 @@ function renderModifiers(trackName) {
 
   cornersList.innerHTML = "";
   sectorsList.innerHTML = "";
+  weatherEffectList.innerHTML = "";
 
-  if (!modifiers.corners.length && !modifiers.sectors.length) {
+  if (
+    !modifiers.corners.length &&
+    !modifiers.straights.length &&
+    !modifiers.weatherEffect
+  ) {
     modifiersSection.hidden = true;
     emptyMessage.textContent = "No modifiers available for this track.";
     emptyMessage.hidden = false;
@@ -52,6 +58,10 @@ function renderModifiers(trackName) {
     item.textContent = `Sector ${index + 1}: ${straight}`;
     sectorsList.appendChild(item);
   });
+
+  const weatherEffectItem = document.createElement("li");
+  weatherEffectItem.textContent = modifiers.weatherEffect;
+  weatherEffectList.appendChild(weatherEffectItem);
 
   modifiersSection.hidden = false;
   emptyMessage.hidden = true;

@@ -13,12 +13,12 @@
         Heat - Modifiers Setup
       </h1>
       <p class="header-description">
-        Choose a track and get the corners & sectors modifiers.
+        Choose a track and get the corner, sector, and weather modifiers.
       </p>
       <ul class="header-list">
         <li>Random press corners random between 0 and 2</li>
         <li>Random no modifiers (1 or 0) for sectors and corners</li>
-        <li>Always at least 1 weather effect</li>
+        <li>Each track has exactly one weather effect: Sunny, Cloudy, Rainy, Stormy, Foggy, or Snowy</li>
       </ul>
     </header>
 
@@ -27,7 +27,7 @@
         <label for="trackSelect">Track</label>
         <select id="trackSelect" aria-label="Track selector"></select>
         <p class="hint">
-          Select a track to see the modifier setup for corners and straights.
+          Select a track to see the modifier setup for corners, sectors, and its weather effect.
         </p>
       </section>
 
@@ -43,6 +43,10 @@
           <div class="modifiers-group" id="sectorsGroup">
             <h3>Sector</h3>
             <ul id="sectorsList"></ul>
+          </div>
+          <div class="modifiers-group" id="weatherEffectGroup">
+            <h3>Weather Effect</h3>
+            <ul id="weatherEffectList"></ul>
           </div>
         </div>
       </section>
