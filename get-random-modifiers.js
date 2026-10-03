@@ -59,13 +59,18 @@ function processSectorsModifiers(sectorsNum) {
     "Free Boost",
   ];
 
-  const plainStraightsNum = getRandomIntFromZeroToMax(2);
+  let plainStraightsNum = getRandomIntFromZeroToMax(2);
   const requiredWeatherEffectsNum = 1;
 
   const remaining = Math.max(
     0,
     sectorsNum - plainStraightsNum - requiredWeatherEffectsNum,
   );
+
+  if (remaining > STRAIGHT_MODIFIERS.length) {
+    plainStraightsNum += remaining - STRAIGHT_MODIFIERS.length;
+  }
+
 
   let selected = [
     ...getRandomElements(STRAIGHT_MODIFIERS, remaining),
@@ -90,6 +95,8 @@ const trackList = [
   "Spain",
   "Italy",
   "USA",
+  "South Africa",
+  "Germany"
 ];
 
 function getTrackModifiers(track) {
@@ -102,6 +109,8 @@ function getTrackModifiers(track) {
     Spain: { cornersNum: 9, sectorsNum: 9 },
     Italy: { cornersNum: 3, sectorsNum: 3 },
     USA: { cornersNum: 4, sectorsNum: 4 },
+    "South Africa": {cornersNum: 7, sectorsNum: 7},
+    Germany: {cornersNum: 5, sectorsNum: 5}
   };
 
   const { cornersNum, sectorsNum } = trackDetails[track];
